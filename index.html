@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>До каникул осталось...</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>До каникул осталось <span id="time"></span></h1>
+        <script>
+            const now = new Date();
+            const endOfYear = new Date(now.getFullYear(), 4, 23);
+            let timeLeft = endOfYear - now;
+            if (timeLeft <= 0) {
+                timeLeft = new Date(now.getFullYear() + 1, 4, 23) - now;
+            }
+            document.getElementById("time").innerHTML = Math.floor(timeLeft / (1000 * 60 * 60 * 24)) + " дней";
+        </script>
+    </body>
+</html>
