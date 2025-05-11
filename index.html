@@ -5,15 +5,22 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h1>До каникул осталось <span id="time"></span></h1>
+        <h1>До каникул осталось <span id="time"></span> включая концерт</h1>
         <script>
             const now = new Date();
-            const endOfYear = new Date(now.getFullYear(), 4, 23);
+            const endOfYear = new Date(now.getFullYear(), 4, 31);
             let timeLeft = endOfYear - now;
             if (timeLeft <= 0) {
                 timeLeft = new Date(now.getFullYear() + 1, 4, 23) - now;
             }
-            document.getElementById("time").innerHTML = (Math.floor(timeLeft / (1000 * 60 * 60 * 24))+1) + " дней";
+            const daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24)) + 2;
+            let sundaysCount = 0;
+            for (let i = 0; i < daysLeft; i++) {
+                if (new Date(now.getFullYear(), now.getMonth(), now.getDate() + i).getDay() === 0) {
+                    sundaysCount++;
+                }
+            }
+            document.getElementById("time").innerHTML = (daysLeft - sundaysCount) + " дней";
         </script>
     </body>
 </html>
